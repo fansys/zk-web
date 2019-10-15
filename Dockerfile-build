@@ -1,0 +1,12 @@
+FROM debian
+
+ENV LANG C.UTF-8
+
+## Prepare environment to build ruby packages
+RUN apt-get update \
+    && apt-get install -y wget ca-certificates ruby-dev leiningen  \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /usr/src/app
+
+CMD ["lein", "uberjar"]
